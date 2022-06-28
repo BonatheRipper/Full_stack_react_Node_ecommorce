@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="Index.css" />
+    <title>Title</title>
+  </head>
+  <body>
+    <header>
+      <h1>>Header</h1>
+    </header>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+
+            $( document ).ready(function() {
+       var bitcoin = {
+              async: true,
+              scroosDomain: true,
+              url: "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true",
+              method: "GET",
+              headers: {},
+            };
+            $.ajax(bitcoin).done(function (response) {
+              let btc_vol = response.bitcoin.usd_24h_change.toFixed(2);
+              let btc_price = response.bitcoin.usd;
+
+              $("#btc-volume").text(btc_vol);
+              $("#btc-price").text("BTC $" + btc_price);
+            });
+
+            var ethereum = {
+              async: true,
+              scroosDomain: true,
+              url: "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_24hr_change=true",
+              method: "GET",
+              headers: {},
+            };
+            $.ajax(ethereum).done(function (response) {
+              let eth_vol = response.ethereum.usd_24h_change.toFixed(2);
+              let eth_price = response.ethereum.usd;
+
+              $("#eth-volume").text(eth_vol);
+              $("#eth-price").text("ETH $" + eth_price);
+            });
+
+            var btc_cash = {
+              async: true,
+              scroosDomain: true,
+              url: "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash&vs_currencies=usd&include_24hr_change=true",
+              method: "GET",
+              headers: {},
+            };
+            $.ajax(btc_cash).done(function (response) {
+              let bch = ["bitcoin-cash"]
+              let bch_vol = response.["bitcoin-cash"].usd_24h_change.toFixed(2);
+              let bch_price = response.["bitcoin-cash"].usd;
+
+              $("bch-volume").text(bch_vol);
+              $("#bch-price").text("BCH $" + bch_price);
+            });
+
+            var flex = {
+              async: true,
+              scroosDomain: true,
+              url: "https://api.coingecko.com/api/v3/simple/price?ids=flex-coin&vs_currencies=usd&include_24hr_change=true",
+              method: "GET",
+              headers: {},
+            };
+            $.ajax(flex).done(function (response) {
+              let flex_vol = response.flex - coin.usd_24h_change.toFixed(2);
+              let flex_price = response.flex - coin.usd;
+
+              $("flex-volume").text(flex_vol);
+              $("#flex-price").text("FLEX $" + flex_price);
+            });
+
+            const x = "-283u3"
+            x.includes("-")
+
+      });
+    </script>
+  </body>
+</html>
