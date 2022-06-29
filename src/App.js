@@ -4,25 +4,24 @@ import Home from "./components/Home";
 import ProductScreen from "./components/ProductScreen";
 import { Navbar, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-
+import { Helmet } from "react-helmet-async";
 const App = () => {
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
+        <Helmet>
+          <title>Ripper</title>
+        </Helmet>
         <header>
           <Navbar bg="dark" variant="dark">
             <Container>
               <LinkContainer to="/">
-                <Navbar.Brand>
-                  
-                  <Helmet>
-                    <title>Ripper</title>
-                  </Helmet>
-                </Navbar.Brand>
+                <Navbar.Brand>Ripper</Navbar.Brand>
               </LinkContainer>
             </Container>
           </Navbar>
         </header>
+
         <main>
           <Container className="mt-3">
             <Routes>

@@ -9,10 +9,10 @@ app.get("/api/products", (req, res) => {
 app.get("/api/products/slug/:slug", (req, res) => {
   const product = data.products.find((x) => x.slug === req.params.slug);
   if (product) {
-    console.log(product);
     res.send(product);
   } else {
-    res.send(404).send({ message: "Products not found" });
+    console.log("there was an error");
+    return res.status(404).send({ message: "Products not found" });
   }
   res.send(data.product);
 });

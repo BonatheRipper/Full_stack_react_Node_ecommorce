@@ -2,6 +2,8 @@ import logger from "use-reducer-logger";
 import axios from "axios";
 import { Row, Col } from "react-bootstrap";
 import Products from "./Products";
+import LoadingBox from "./LoadingBox";
+import MessageBox from "./MessageBox";
 import React, {
   createContext,
   useContext,
@@ -47,21 +49,27 @@ const Home = () => {
     <div>
       <h1 className="featuredHeader">Featured Products</h1>
       <div className="productsContainer">
-        <Row>
-          {products.map((item) => {
-            return (
-              <Col
-                key={item.slug + Math.floor(Math.random() * 2292)}
-                className="m-3"
-                sm={6}
-                md={4}
-                lg={3}
-              >
-                <Products item={item} />
-              </Col>
-            );
-          })}
-        </Row>
+        {loading ? (
+          <LoadingBox />
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <Row>
+            {products.map((item) => {
+              return (
+                <Col
+                  key={item.slug + Math.floor(Math.random() * 2292)}
+                  className="m-3"
+                  sm={6}
+                  md={4}
+                  lg={3}
+                >
+                  <Products item={item} />
+                </Col>
+              );
+            })}
+          </Row>
+        )}
       </div>
     </div>
   );
