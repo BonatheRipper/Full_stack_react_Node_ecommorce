@@ -12,34 +12,29 @@ import React, {
   useRef,
   useState,
 } from "react";
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "FETCH_REQUEST":
-      return { ...state, loading: true };
-    case "FETCH_SUCCESS":
-      return { ...state, products: action.payload, loading: false };
-    case "FETCH_FAIL":
-      return { ...state, loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
-
 const Home = () => {
-  const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
-    loading: true,
-    error: "",
-    products: [],
-  });
-  // const [products, setProducts] = useState([]);
+  const initial = { items: [null], loading: true, error: null };
+
+  const [products, setProducts] = useState(initial);
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get("/api/products");
-        dispatch({ type: "FETCH_SUCCESS", payload: result.data.products });
+        setProducts((prevProducts) => {
+          return {
+            ...prevProducts,
+            items: result.data.products,
+            loading: false,
+          };
+        });
+        console.log(products);
       } catch (e) {
-        dispatch({ type: "FETCH_FAIL", payload: e.message });
+        setProducts((prevProducts) => {
+          return {
+            ...prevProducts,
+            error: e.message,
+          };
+        });
       }
     };
     fetchData();
@@ -49,13 +44,13 @@ const Home = () => {
     <div>
       <h1 className="featuredHeader">Featured Products</h1>
       <div className="productsContainer">
-        {loading ? (
+        {products.loading ? (
           <LoadingBox />
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
+        ) : products.error ? (
+          <MessageBox variant="danger">{products.error}</MessageBox>
         ) : (
           <Row>
-            {products.map((item) => {
+            {products.items.map((item) => {
               return (
                 <Col
                   key={item.slug + Math.floor(Math.random() * 2292)}

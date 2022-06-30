@@ -1,8 +1,8 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
 import ProductScreen from "./components/ProductScreen";
-import { Navbar, Container } from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Helmet } from "react-helmet-async";
 const App = () => {
@@ -18,6 +18,11 @@ const App = () => {
               <LinkContainer to="/">
                 <Navbar.Brand>Ripper</Navbar.Brand>
               </LinkContainer>
+              <Nav className="me-auto">
+                <Link to="/cart" className="nav-link">
+                  Cart
+                </Link>
+              </Nav>
             </Container>
           </Navbar>
         </header>
