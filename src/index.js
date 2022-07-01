@@ -5,14 +5,16 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import reportWebVitals from "./reportWebVitals";
-import { StoreProvider } from "./components/Store";
+import { ContextProvider } from "./components/Store";
 
 function Index() {
   return (
     <div className="component">
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
+      <ContextProvider>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </ContextProvider>
     </div>
   );
 }

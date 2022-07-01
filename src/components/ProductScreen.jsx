@@ -9,6 +9,7 @@ import React, {
 import LoadingBox from "./LoadingBox";
 import MessageBox from "./MessageBox";
 import { Helmet } from "react-helmet-async";
+import { useStateContext } from "./Store";
 
 import axios from "axios";
 import { Row, Col, ListGroup, Card, Badge, Button } from "react-bootstrap";
@@ -29,39 +30,64 @@ const reducer = (state, action) => {
   }
 };
 const ProductScreen = () => {
-  const params = useParams();
-
-  const { slug } = params;
-  const [{ loading, error, product }, dispatch] = useReducer(reducer, {
-    loading: true,
-    error: "",
-    product: [],
-  });
+  const { slug } = useParams();
+  const initial = { item: [null], loading: true, error: null };
+  const [product, setProduct] = useState(initial);
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get(`/api/products/slug/${slug}`);
-        console.log(result);
-        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
-      } catch (error) {
-        dispatch({ type: "FETCH_FAIL", payload: GetError(error) });
+        setProduct((prevProduct) => {
+          return {
+            ...prevProduct,
+            item: result.data,
+            loading: false,
+          };
+        });
+      } catch (e) {
+        setProduct((prevProduct) => {
+          return {
+            ...prevProduct,
+            error: GetError(e),
+          };
+        });
       }
     };
     fetchData();
   }, [slug]);
+  const { Cart, setCart } = useStateContext();
 
-  return loading ? (
+  const addToCartHandler = () => {
+    setCart((prevCart) => {
+      return {
+        ...prevCart,
+        cart: {
+          ...prevCart,
+          cartItems: [
+            ...prevCart.cart.cartItems,
+            { ...product.item, quatity: 1 },
+          ],
+        },
+      };
+    });
+    console.log(Cart);
+  };
+
+  return product.loading ? (
     <LoadingBox />
-  ) : error ? (
+  ) : product.error ? (
     <MessageBox variant="danger" className>
-      {error}
+      {product.error}
     </MessageBox>
   ) : (
     <div>
       <Row>
         <Col md={6}>
-          <img className="img-large" src={product.image} alt={product.name} />
+          <img
+            className="img-large"
+            src={product.item.image}
+            alt={product.name}
+          />
         </Col>
         <Col md={3}>
           <ListGroup variant="flush">
@@ -72,12 +98,14 @@ const ProductScreen = () => {
             </ListGroup.Item>
             <ListGroup.Item>
               <Ratings
-                rating={product.rating}
-                numReviews={product.numReviews}
+                rating={product.item.rating}
+                numReviews={product.item.numReviews}
               />
             </ListGroup.Item>
-            <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
-            <ListGroup.Item>Description : {product.description}</ListGroup.Item>
+            <ListGroup.Item>Price : ${product.item.price}</ListGroup.Item>
+            <ListGroup.Item>
+              Description : {product.item.description}
+            </ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={3}>
@@ -87,14 +115,14 @@ const ProductScreen = () => {
                 <ListGroup.Item>
                   <Row>
                     <Col>Price:</Col>
-                    <Col>${product.price}</Col>
+                    <Col>${product.item.price}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Status:</Col>
                     <Col>
-                      {product.countInStock > 0 ? (
+                      {product.item.countInStock > 0 ? (
                         <Badge bg="success">in Stock</Badge>
                       ) : (
                         <Badge bg="danger">Unavailable</Badge>
@@ -102,10 +130,12 @@ const ProductScreen = () => {
                     </Col>
                   </Row>
                 </ListGroup.Item>
-                {product.countInStock > 0 && (
+                {product.item.countInStock > 0 && (
                   <ListGroup.Item>
                     <div className="d-grid">
-                      <Button variant="primary">Add to Cart</Button>
+                      <Button onClick={addToCartHandler} variant="primary">
+                        Add to Cart
+                      </Button>
                     </div>
                   </ListGroup.Item>
                 )}

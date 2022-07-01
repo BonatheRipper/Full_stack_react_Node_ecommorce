@@ -1,7 +1,14 @@
-// import { createContext, useReducer } from "react";
+import React, {
+  createContext,
+  useReducer,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 // export const Store = createContext();
-// const intialState = {
+// const intialStates = {
 //   cart: {
 //     cartItems: [],
 //   },
@@ -23,3 +30,21 @@
 //   const value = { state, dispatch };
 //   return <Store.Provider value={value}>{props.children}</Store.Provider>;
 // }
+
+const StateContext = createContext();
+const intialState = {
+  cart: {
+    cartItems: [],
+  },
+};
+
+export const ContextProvider = ({ children }) => {
+  const [Cart, setCart] = useState(intialState);
+  return (
+    <StateContext.Provider value={{ Cart, setCart }}>
+      {children}
+    </StateContext.Provider>
+  );
+};
+
+export const useStateContext = () => useContext(StateContext);

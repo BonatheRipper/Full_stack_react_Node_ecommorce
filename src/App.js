@@ -2,10 +2,14 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
 import ProductScreen from "./components/ProductScreen";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, CarouselItem, Badge } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Helmet } from "react-helmet-async";
+import { useStateContext } from "./components/Store";
+
 const App = () => {
+  const { Cart } = useStateContext();
+  const { cart } = Cart;
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
@@ -21,6 +25,11 @@ const App = () => {
               <Nav className="me-auto">
                 <Link to="/cart" className="nav-link">
                   Cart
+                  {cart.cartItems.length > 0 && (
+                    <Badge pill bg="danger">
+                      {cart.cartItems.length}
+                    </Badge>
+                  )}
                 </Link>
               </Nav>
             </Container>

@@ -4,14 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import Products from "./Products";
 import LoadingBox from "./LoadingBox";
 import MessageBox from "./MessageBox";
-import React, {
-  createContext,
-  useContext,
-  useReducer,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 const Home = () => {
   const initial = { items: [null], loading: true, error: null };
 
@@ -20,6 +13,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const result = await axios.get("/api/products");
+        console.log(result);
         setProducts((prevProducts) => {
           return {
             ...prevProducts,
