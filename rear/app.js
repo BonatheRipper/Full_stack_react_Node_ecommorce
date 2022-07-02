@@ -16,6 +16,16 @@ app.get("/api/products/slug/:slug", (req, res) => {
   }
   res.send(data.product);
 });
+app.get("/api/products/:id", (req, res) => {
+  const product = data.products.find((x) => x._id === req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    console.log("there was an error");
+    return res.status(404).send({ message: "Products not found" });
+  }
+  res.send(data.product);
+});
 const server = app.listen(port, () =>
   console.log("Server connected to port: " + port)
 );

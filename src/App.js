@@ -8,8 +8,14 @@ import { Helmet } from "react-helmet-async";
 import { useStateContext } from "./components/Store";
 
 const App = () => {
-  const { Cart } = useStateContext();
+  const { Cart, CartStock } = useStateContext();
   const { cart } = Cart;
+  // // const sum = cart.cartItems.reduce((accumulator, object) => {
+  // //   if (object.quantity) return accumulator + object.quantity;
+  // // }, 0);
+  // for (let x of cart.cartItems) {
+  //   console.log(x.quantity);
+  // }
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
@@ -27,7 +33,7 @@ const App = () => {
                   Cart
                   {cart.cartItems.length > 0 && (
                     <Badge pill bg="danger">
-                      {cart.cartItems.length}
+                      {CartStock > 0 ? CartStock : ""}
                     </Badge>
                   )}
                 </Link>

@@ -12,6 +12,7 @@
 const Data = {
   products: [
     {
+      _id: 1,
       name: " Nike Slim Shirt",
       slug: " nike-slim-shirt",
       category: "shirts",
@@ -25,6 +26,7 @@ const Data = {
       description: "High quality shirt",
     },
     {
+      _id: 2,
       name: "Puma shirt",
       slug: "Puma-slim-shirt",
       category: "shirts",
@@ -38,6 +40,7 @@ const Data = {
       description: "High quality shirt",
     },
     {
+      _id: 3,
       name: "Open Ankara Shirt",
       slug: " nike-slim-shirt",
       category: "shirts",
@@ -51,6 +54,7 @@ const Data = {
       description: "High quality shirt",
     },
     {
+      _id: 4,
       name: " Nike New Shirt",
       slug: " new-slim-shirt",
       category: "shirts",
@@ -64,6 +68,7 @@ const Data = {
       description: "High quality shirt",
     },
     {
+      _id: 5,
       name: " Nike Slim Shirt",
       slug: " nike-slim-shirt",
       category: "shirts",
@@ -77,6 +82,7 @@ const Data = {
       description: "High quality shirt",
     },
     {
+      _id: 6,
       name: " Nike Slim Shirt",
       slug: " nike-slim-shirt",
       category: "shirts",
@@ -89,6 +95,7 @@ const Data = {
       description: "High quality shirt",
     },
     {
+      _id: 7,
       name: " Nike Slim Shirt",
       slug: " nike-slim-shirt",
       category: "shirts",
@@ -100,6 +107,7 @@ const Data = {
       rating: 4.5,
     },
     {
+      _id: 8,
       name: " Nike Slim Shirt",
       slug: " nike-slim-shirt",
       category: "shirts",
@@ -111,6 +119,7 @@ const Data = {
       rating: 4.5,
     },
     {
+      _id: 9,
       name: " Nike Slim Shirt",
       slug: " nike-slim-shirt",
       category: "shirts",
@@ -122,6 +131,7 @@ const Data = {
       rating: 4.5,
     },
     {
+      _id: 10,
       name: " Nike Slim Shirt",
       slug: " nike-slim-shirt",
       category: "shirts",
@@ -135,6 +145,7 @@ const Data = {
       description: "High quality shirt",
     },
     {
+      _id: 11,
       name: " Nike Slim Shirt",
       slug: " nike-slim-shirt",
       category: "shirts",

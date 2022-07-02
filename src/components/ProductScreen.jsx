@@ -17,18 +17,6 @@ import Ratings from "./Ratings";
 import { useParams } from "react-router-dom";
 import { GetError } from "../util";
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "FETCH_REQUEST":
-      return { ...state, loading: true };
-    case "FETCH_SUCCESS":
-      return { ...state, product: action.payload, loading: false };
-    case "FETCH_FAIL":
-      return { ...state, loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
 const ProductScreen = () => {
   const { slug } = useParams();
   const initial = { item: [null], loading: true, error: null };
@@ -55,22 +43,33 @@ const ProductScreen = () => {
     };
     fetchData();
   }, [slug]);
-  const { Cart, setCart } = useStateContext();
-
-  const addToCartHandler = () => {
-    setCart((prevCart) => {
-      return {
-        ...prevCart,
-        cart: {
+  const { Cart, setCart, CartStock, setCartStock } = useStateContext();
+  const { cart } = Cart;
+  const addToCartHandler = async () => {
+    const existItem = cart.cartItems.find((x) => x._id === product.item._id);
+    const quatity = existItem ? existItem.quatity + 1 : 1;
+    if (!existItem) {
+      setCart((prevCart) => {
+        return {
           ...prevCart,
-          cartItems: [
-            ...prevCart.cart.cartItems,
-            { ...product.item, quatity: 1 },
-          ],
-        },
-      };
-    });
-    console.log(Cart);
+          cart: {
+            ...prevCart,
+            cartItems: [
+              ...prevCart.cart.cartItems,
+              { ...product.item, quatity: quatity },
+            ],
+          },
+        };
+      });
+    } else {
+      existItem.quatity = quatity;
+    }
+    setCartStock(
+      cart.cartItems.reduce((total, object) => {
+        return object.quatity + total;
+      }, 0)
+    );
+    console.log(cart);
   };
 
   return product.loading ? (

@@ -40,8 +40,10 @@ const intialState = {
 
 export const ContextProvider = ({ children }) => {
   const [Cart, setCart] = useState(intialState);
+  const [CartStock, setCartStock] = useState(1);
+
   return (
-    <StateContext.Provider value={{ Cart, setCart }}>
+    <StateContext.Provider value={{ Cart, CartStock, setCartStock, setCart }}>
       {children}
     </StateContext.Provider>
   );
