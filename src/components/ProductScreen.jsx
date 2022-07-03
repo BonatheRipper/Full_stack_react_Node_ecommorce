@@ -10,14 +10,14 @@ import LoadingBox from "./LoadingBox";
 import MessageBox from "./MessageBox";
 import { Helmet } from "react-helmet-async";
 import { useStateContext } from "./Store";
-
 import axios from "axios";
 import { Row, Col, ListGroup, Card, Badge, Button } from "react-bootstrap";
 import Ratings from "./Ratings";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GetError } from "../util";
 
 const ProductScreen = () => {
+  const navigate = useNavigate();
   const { slug } = useParams();
   const initial = { item: [null], loading: true, error: null };
   const [product, setProduct] = useState(initial);
@@ -64,14 +64,18 @@ const ProductScreen = () => {
     } else {
       existItem.quatity = quatity;
     }
-    setCartStock(
-      cart.cartItems.reduce((total, object) => {
-        return object.quatity + total;
-      }, 0)
-    );
-    console.log(cart);
+    setCartStock(0);
+    navigate("/cart");
   };
 
+  function setCartTotal() {
+    return cart.cartItems.reduce((total, object) => {
+      return object.quatity + total;
+    }, 0);
+  }
+  useEffect(() => {
+    setCartStock(setCartTotal());
+  }, [setCartTotal()]);
   return product.loading ? (
     <LoadingBox />
   ) : product.error ? (

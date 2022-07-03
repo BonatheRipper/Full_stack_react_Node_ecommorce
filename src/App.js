@@ -6,6 +6,7 @@ import { Navbar, Container, Nav, CarouselItem, Badge } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { useStateContext } from "./components/Store";
+import CartScreen from "./components/cartScreen";
 
 const App = () => {
   const { Cart, CartStock } = useStateContext();
@@ -31,9 +32,9 @@ const App = () => {
               <Nav className="me-auto">
                 <Link to="/cart" className="nav-link">
                   Cart
-                  {cart.cartItems.length > 0 && (
+                  {CartStock > 0 && (
                     <Badge pill bg="danger">
-                      {CartStock > 0 ? CartStock : ""}
+                      {CartStock}
                     </Badge>
                   )}
                 </Link>
@@ -47,6 +48,7 @@ const App = () => {
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/" element={<Home />} />
+              <Route path="/cart" element={<CartScreen />} />
             </Routes>
           </Container>
         </main>
