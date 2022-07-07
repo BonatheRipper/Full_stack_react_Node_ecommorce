@@ -47,7 +47,12 @@ const ProductScreen = () => {
   const { cart } = Cart;
   const addToCartHandler = async () => {
     const existItem = cart.cartItems.find((x) => x._id === product.item._id);
-    const quatity = existItem ? existItem.quatity + 1 : 1;
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product.item._id}`);
+    if (data.countInStock < quantity) {
+      window.alert("Sorry. Product is out of  stock");
+      return;
+    }
     if (!existItem) {
       setCart((prevCart) => {
         return {
@@ -56,26 +61,28 @@ const ProductScreen = () => {
             ...prevCart,
             cartItems: [
               ...prevCart.cart.cartItems,
-              { ...product.item, quatity: quatity },
+              { ...product.item, quantity: quantity },
             ],
           },
         };
       });
     } else {
-      existItem.quatity = quatity;
+      existItem.quantity = quantity;
     }
     setCartStock(0);
+
     navigate("/cart");
   };
 
-  function setCartTotal() {
-    return cart.cartItems.reduce((total, object) => {
-      return object.quatity + total;
-    }, 0);
-  }
   useEffect(() => {
-    setCartStock(setCartTotal());
-  }, [setCartTotal()]);
+    setCartStock(
+      cart.cartItems.reduce((total, object) => {
+        return object.quantity + total;
+      }, 0)
+    );
+    localStorage.setItem("cartItems", JSON.stringify(cart.cartItems));
+  }, [Cart.cart.cartItems.length]);
+
   return product.loading ? (
     <LoadingBox />
   ) : product.error ? (

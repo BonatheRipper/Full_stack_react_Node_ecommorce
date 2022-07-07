@@ -3,12 +3,56 @@ import { useStateContext } from "./Store";
 import { Helmet } from "react-helmet-async";
 import { Row, Col, ListGroup, Button, Card } from "react-bootstrap";
 import MessageBox from "./MessageBox";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
+
 const CartScreen = () => {
   const { Cart, setCart, CartStock, setCartStock } = useStateContext();
   const { cart } = Cart;
-  const { cartItems } = cart;
-  console.log(cartItems);
+  var { cartItems } = cart;
+  const navigate = useNavigate();
+
+  const updateCartHandler = async (item, action) => {
+    const { data } = await axios.get(`/api/products/${item._id}`);
+
+    if (action === "Add") {
+      if (data.countInStock < item.quantity) {
+        alert("Sorry. Product is out of  stuck");
+        return;
+      }
+      item.quantity = item.quantity + 1;
+    } else if (action === "Minus") {
+      item.quantity = item.quantity - 1;
+    } else if (action === "Trash") {
+      cartItems = Cart.cart.cartItems.filter((el) => {
+        return item._id !== el._id;
+      });
+      setCart((prev) => {
+        return {
+          ...prev,
+          cart: { ...prev.cart, cartItems },
+        };
+      });
+    }
+    setCartStock(
+      cartItems.reduce((total, object) => {
+        return object.quantity + total;
+      }, 0)
+    );
+    console.log(cartItems);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  };
+  const proceedToCheckOut = () => {
+    navigate("/signing?redirect=/shipping");
+  };
+  useEffect(() => {
+    setCartStock(
+      cartItems.reduce((total, object) => {
+        return object.quantity + total;
+      }, 0)
+    );
+  }, [Cart.cart.cartItems.length]);
   return (
     <div>
       <Helmet>
@@ -37,16 +81,18 @@ const CartScreen = () => {
 
                     <Col md={3}>
                       <Button
+                        onClick={() => updateCartHandler(item, "Minus")}
                         variant="light"
-                        disabled={item.quantity === item.countInStock}
+                        disabled={item.quantity === 0}
                       >
                         <i
                           className="fa fa-minus-circle"
                           aria-hidden="true"
                         ></i>
                       </Button>
-                      <span>{item.quatity}</span>
+                      <span>{item.quantity}</span>
                       <Button
+                        onClick={() => updateCartHandler(item, "Add")}
                         variant="light"
                         disabled={item.quantity === item.countInStock}
                       >
@@ -56,7 +102,10 @@ const CartScreen = () => {
 
                     <Col md={3}>${item.price}</Col>
                     <Col md={2}>
-                      <Button variant="light">
+                      <Button
+                        onClick={() => updateCartHandler(item, "Trash")}
+                        variant="light"
+                      >
                         <i className="fa fa-trash" aria-hidden="true"></i>
                       </Button>
                     </Col>
@@ -74,11 +123,11 @@ const CartScreen = () => {
                   <h3>
                     Subtotal (
                     {cartItems.reduce((total, object) => {
-                      return object.quatity + total;
+                      return object.quantity + total;
                     }, 0)}{" "}
                     items) : $
                     {cart.cartItems.reduce((total, object) => {
-                      return object.quatity * object.price + total;
+                      return object.quantity * object.price + total;
                     }, 0)}
                   </h3>
                 </ListGroup.Item>
@@ -89,6 +138,7 @@ const CartScreen = () => {
                       type="button"
                       variant="primary"
                       disabled={cartItems.length === 0}
+                      onClick={proceedToCheckOut}
                     >
                       Proceed to Checkout
                     </Button>

@@ -13,8 +13,8 @@ const Data = {
   products: [
     {
       _id: 1,
-      name: " Nike Slim Shirt",
-      slug: " nike-slim-shirt",
+      name: " Nike Slim Shirt 0",
+      slug: " nike-slim-shirt4",
       category: "shirts",
       image:
         "https://burst.shopifycdn.com/photos/fashionable-man-in-hat.jpg?width=746&format=pjpg&exif=1&iptc=1",
@@ -28,7 +28,7 @@ const Data = {
     {
       _id: 2,
       name: "Puma shirt",
-      slug: "Puma-slim-shirt",
+      slug: "Puma-slim-shirt3",
       category: "shirts",
       image:
         "https://burst.shopifycdn.com/photos/man-in-white-and-light-tan-outfit.jpg?width=746&format=pjpg&exif=1&iptc=1",
@@ -42,7 +42,7 @@ const Data = {
     {
       _id: 3,
       name: "Open Ankara Shirt",
-      slug: " nike-slim-shirt",
+      slug: " nike-slim-shirt2",
       category: "shirts",
       image:
         "https://burst.shopifycdn.com/photos/slow-fashion-coat.jpg?width=746&format=pjpg&exif=1&iptc=1",
@@ -55,8 +55,8 @@ const Data = {
     },
     {
       _id: 4,
-      name: " Nike New Shirt",
-      slug: " new-slim-shirt",
+      name: " Nike  Shirt",
+      slug: " new-slim-shirt1",
       category: "shirts",
       image:
         "https://burst.shopifycdn.com/photos/mens-fashion-loose-cotton-shirt.jpg?width=746&format=pjpg&exif=1&iptc=1",
@@ -69,8 +69,8 @@ const Data = {
     },
     {
       _id: 5,
-      name: " Nike Slim Shirt",
-      slug: " nike-slim-shirt",
+      name: " Nike Slim Shirt 2",
+      slug: " nike-slim-shirt5",
       category: "shirts",
       image:
         "https://burst.shopifycdn.com/photos/man-buttoning-a-dark-red-shirt.jpg?width=746&format=pjpg&exif=1&iptc=1",
@@ -83,8 +83,8 @@ const Data = {
     },
     {
       _id: 6,
-      name: " Nike Slim Shirt",
-      slug: " nike-slim-shirt",
+      name: " Nike Slim Shirt 3",
+      slug: " nike-slim-shirt6",
       category: "shirts",
       image:
         "https://burst.shopifycdn.com/photos/urban-mens-fashion-on-young-adult.jpg?width=746&format=pjpg&exif=1&iptc=1",
@@ -96,8 +96,8 @@ const Data = {
     },
     {
       _id: 7,
-      name: " Nike Slim Shirt",
-      slug: " nike-slim-shirt",
+      name: " Nike Slim Shirt 4",
+      slug: " nike-slim-shirt8",
       category: "shirts",
       image:
         "https://burst.shopifycdn.com/photos/man-poses-in-light-colored-overcoat.jpg?width=746&format=pjpg&exif=1&iptc=1",
@@ -108,8 +108,8 @@ const Data = {
     },
     {
       _id: 8,
-      name: " Nike Slim Shirt",
-      slug: " nike-slim-shirt",
+      name: " Nike Slim Shirt 5",
+      slug: " nike-slim-shirt03",
       category: "shirts",
       image:
         "https://burst.shopifycdn.com/photos/man-hiking-in-mountains.jpg?width=746&format=pjpg&exif=1&iptc=1",
@@ -120,8 +120,8 @@ const Data = {
     },
     {
       _id: 9,
-      name: " Nike Slim Shirt",
-      slug: " nike-slim-shirt",
+      name: " Nike Slim Shirt 6",
+      slug: " nike-slim-shirt32",
       category: "shirts",
       image:
         "https://burst.shopifycdn.com/photos/green-blazer-shoes-step-in-style.jpg?width=746&format=pjpg&exif=1&iptc=1",
@@ -132,8 +132,8 @@ const Data = {
     },
     {
       _id: 10,
-      name: " Nike Slim Shirt",
-      slug: " nike-slim-shirt",
+      name: " Nike Slim Shirt 7",
+      slug: " nike-slim-shirt22",
       category: "shirts",
       image:
         "https://burst.shopifycdn.com/photos/mens-fashion-stonewash-jeans-and-boots.jpg?width=746&format=pjpg&exif=1&iptc=1",
@@ -146,8 +146,8 @@ const Data = {
     },
     {
       _id: 11,
-      name: " Nike Slim Shirt",
-      slug: " nike-slim-shirt",
+      name: " Nike Slim Shirt 8",
+      slug: " nike-slim-shirt22",
       category: "shirts",
       image:
         "https://burst.shopifycdn.com/photos/light-men-s-dress-shirt.jpg?width=746&format=pjpg&exif=1&iptc=1",
