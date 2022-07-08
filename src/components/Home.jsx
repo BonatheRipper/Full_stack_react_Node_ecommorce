@@ -13,10 +13,11 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const result = await axios.get("/api/products");
+        console.log(result);
         setProducts((prevProducts) => {
           return {
             ...prevProducts,
-            items: result.data.products,
+            items: result.data,
             loading: false,
           };
         });

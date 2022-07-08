@@ -1,18 +1,23 @@
-// import product1 from "/images/shirt1.jpg";
-// import product2 from "/images/shirt2.jpg";
-// import product3 from "/images/shirt3.jpg";
-// import product4 from "/images/shirt4.jpg";
-// import product5 from "/images/shirt5.jpg";
-// import product6 from "/images/shirt6.jpg";
-// import product7 from "/images/shirt7.jpg";
-// import product8 from "/images/shirt8.jpg";
-// import product9 from "/images/shirt9.jpg";
-// import product10 from "/images/shirt10.jpg";
+import bcrypt from "bcryptjs";
 
 const Data = {
+  users: [
+    {
+      name: "Bona Andrews",
+      email: "Bona9ja@gmail.com",
+      password: bcrypt.hashSync("123456"),
+      isAdmin: true,
+    },
+    {
+      name: "Joel Ani",
+      email: "joel@gmail.com",
+      password: bcrypt.hashSync("123456"),
+      isAdmin: false,
+    },
+  ],
+
   products: [
     {
-      _id: 1,
       name: " Nike Slim Shirt 0",
       slug: " nike-slim-shirt4",
       category: "shirts",
@@ -26,7 +31,6 @@ const Data = {
       description: "High quality shirt",
     },
     {
-      _id: 2,
       name: "Puma shirt",
       slug: "Puma-slim-shirt3",
       category: "shirts",
@@ -40,7 +44,6 @@ const Data = {
       description: "High quality shirt",
     },
     {
-      _id: 3,
       name: "Open Ankara Shirt",
       slug: " nike-slim-shirt2",
       category: "shirts",
@@ -54,7 +57,6 @@ const Data = {
       description: "High quality shirt",
     },
     {
-      _id: 4,
       name: " Nike  Shirt",
       slug: " new-slim-shirt1",
       category: "shirts",
@@ -68,7 +70,6 @@ const Data = {
       description: "High quality shirt",
     },
     {
-      _id: 5,
       name: " Nike Slim Shirt 2",
       slug: " nike-slim-shirt5",
       category: "shirts",
@@ -82,7 +83,6 @@ const Data = {
       description: "High quality shirt",
     },
     {
-      _id: 6,
       name: " Nike Slim Shirt 3",
       slug: " nike-slim-shirt6",
       category: "shirts",
@@ -92,10 +92,11 @@ const Data = {
       countInStock: 10,
       brand: "Nike",
       numReviews: 5,
+      rating: 4.5,
+
       description: "High quality shirt",
     },
     {
-      _id: 7,
       name: " Nike Slim Shirt 4",
       slug: " nike-slim-shirt8",
       category: "shirts",
@@ -103,11 +104,13 @@ const Data = {
         "https://burst.shopifycdn.com/photos/man-poses-in-light-colored-overcoat.jpg?width=746&format=pjpg&exif=1&iptc=1",
       price: 120,
       countInStock: 10,
+      numReviews: 5,
+      description: "High quality shirt",
+
       brand: "Nike",
       rating: 4.5,
     },
     {
-      _id: 8,
       name: " Nike Slim Shirt 5",
       slug: " nike-slim-shirt03",
       category: "shirts",
@@ -115,11 +118,13 @@ const Data = {
         "https://burst.shopifycdn.com/photos/man-hiking-in-mountains.jpg?width=746&format=pjpg&exif=1&iptc=1",
       price: 120,
       countInStock: 10,
+      numReviews: 5,
+      description: "High quality shirt",
+
       brand: "Nike",
       rating: 4.5,
     },
     {
-      _id: 9,
       name: " Nike Slim Shirt 6",
       slug: " nike-slim-shirt32",
       category: "shirts",
@@ -127,11 +132,13 @@ const Data = {
         "https://burst.shopifycdn.com/photos/green-blazer-shoes-step-in-style.jpg?width=746&format=pjpg&exif=1&iptc=1",
       price: 120,
       countInStock: 10,
+      numReviews: 5,
+      description: "High quality shirt",
+
       brand: "Nike",
       rating: 4.5,
     },
     {
-      _id: 10,
       name: " Nike Slim Shirt 7",
       slug: " nike-slim-shirt22",
       category: "shirts",
@@ -145,7 +152,6 @@ const Data = {
       description: "High quality shirt",
     },
     {
-      _id: 11,
       name: " Nike Slim Shirt 8",
       slug: " nike-slim-shirt22",
       category: "shirts",
