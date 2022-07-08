@@ -44,7 +44,7 @@ const CartScreen = () => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
   const proceedToCheckOut = () => {
-    navigate("/signing?redirect=/shipping");
+    navigate("/login?redirect=/shipping");
   };
   useEffect(() => {
     setCartStock(

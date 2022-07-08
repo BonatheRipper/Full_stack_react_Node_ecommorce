@@ -7,6 +7,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { useStateContext } from "./components/Store";
 import CartScreen from "./components/cartScreen";
+import Login from "./components/Login";
 
 const App = () => {
   const { Cart, CartStock } = useStateContext();
@@ -46,9 +47,11 @@ const App = () => {
         <main>
           <Container className="mt-3">
             <Routes>
-              <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/" element={<Home />} />
+
+              <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
           </Container>
         </main>
