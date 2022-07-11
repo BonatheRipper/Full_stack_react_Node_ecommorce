@@ -1,23 +1,35 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 import Home from "./components/Home";
 import ProductScreen from "./components/ProductScreen";
-import { Navbar, Container, Nav, CarouselItem, Badge } from "react-bootstrap";
+import {
+  Navbar,
+  Container,
+  Nav,
+  CarouselItem,
+  Badge,
+  NavDropdown,
+} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { useStateContext } from "./components/Store";
 import CartScreen from "./components/cartScreen";
 import Login from "./components/Login";
-
 const App = () => {
-  const { Cart, CartStock } = useStateContext();
+  const { Cart, CartStock, user, setUser } = useStateContext();
   const { cart } = Cart;
-  // // const sum = cart.cartItems.reduce((accumulator, object) => {
-  // //   if (object.quantity) return accumulator + object.quantity;
-  // // }, 0);
-  // for (let x of cart.cartItems) {
-  //   console.log(x.quantity);
-  // }
+  // console.log(user.name, " Thjis is user");
+  const Logout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+  };
+
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
@@ -39,6 +51,29 @@ const App = () => {
                     </Badge>
                   )}
                 </Link>
+                {user ? (
+                  <NavDropdown title={user.name} id="basic-nav-dropdown">
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item>User Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/orderhistory">
+                      <NavDropdown.Item>Order History</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Divider />
+                    <Link
+                      className="dropdown-item"
+                      to="#logout"
+                      onClick={Logout}
+                    >
+                      Logout
+                    </Link>
+                    \{" "}
+                  </NavDropdown>
+                ) : (
+                  <Link className="nav-link" to="/login">
+                    Sign In
+                  </Link>
+                )}
               </Nav>
             </Container>
           </Navbar>
@@ -56,7 +91,7 @@ const App = () => {
           </Container>
         </main>
         <footer>
-          <div className="text-center">All rights reserved</div>
+          <div className="text-center">All rights reserved </div>
         </footer>
       </div>
     </BrowserRouter>
