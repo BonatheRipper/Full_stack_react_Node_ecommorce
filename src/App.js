@@ -24,6 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CartScreen from "./components/cartScreen";
 import Login from "./components/Login";
 import Shipping from "./components/Shipping";
+import Register from "./components/Register";
 const App = () => {
   const { Cart, CartStock, user, setUser } = useStateContext();
   const { cart } = Cart;
@@ -94,6 +95,7 @@ const App = () => {
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/login" element={<Login />} />
               <Route path="/shipping" element={<Shipping />} />
+              <Route path="/register" element={<Register />} />
             </Routes>
           </Container>
         </main>
