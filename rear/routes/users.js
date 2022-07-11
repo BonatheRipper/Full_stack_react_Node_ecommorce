@@ -21,7 +21,7 @@ usersRouter.post(
         return;
       }
     }
-    res.send(401).send({ message: "invalid  email or password" });
+    return res.status(401).send({ message: "invalid  email or password" });
   })
 );
 export default usersRouter;

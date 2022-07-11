@@ -1,9 +1,12 @@
 import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { useLocation, Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { GetError } from "../util";
 import { useStateContext } from "./Store";
 const Login = () => {
   const { search } = useLocation();
@@ -34,11 +37,15 @@ const Login = () => {
       navigate(redirect || "/");
     } catch (e) {
       if (e) {
-        alert("invalid details");
+        toast.error(GetError(e));
       }
     }
   };
-  console.log(user);
+  useEffect(() => {
+    if (user) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, user]);
   return (
     <Container className="small-container">
       <Helmet>

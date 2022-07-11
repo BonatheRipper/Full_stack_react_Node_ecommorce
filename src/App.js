@@ -19,12 +19,13 @@ import {
 import { LinkContainer } from "react-router-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { useStateContext } from "./components/Store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import CartScreen from "./components/cartScreen";
 import Login from "./components/Login";
 const App = () => {
   const { Cart, CartStock, user, setUser } = useStateContext();
   const { cart } = Cart;
-  // console.log(user.name, " Thjis is user");
   const Logout = () => {
     setUser(null);
     localStorage.removeItem("user");
@@ -33,6 +34,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
+        <ToastContainer position="bottom-center" limit={1} />
+
         <Helmet>
           <title>Ripper</title>
         </Helmet>
