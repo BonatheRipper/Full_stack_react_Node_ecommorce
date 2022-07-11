@@ -43,7 +43,7 @@ usersRouter.post(
           password: bcrypt.hashSync(password),
         });
         if (newUser) {
-          res.send({
+          return res.send({
             _id: newUser._id,
             name: newUser.name,
             email: newUser.email,

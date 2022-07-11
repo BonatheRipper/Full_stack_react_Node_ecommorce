@@ -5,7 +5,7 @@ import axios from "axios";
 import { Container, Form, Button } from "react-bootstrap";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { GetError, GetSuccess } from "../util";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useStateContext } from "./Store";
 
 const Register = () => {
@@ -51,7 +51,11 @@ const Register = () => {
       }
     }
   };
-
+  useEffect(() => {
+    if (user) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, user]);
   return (
     <Container className="small-container">
       <Helmet>

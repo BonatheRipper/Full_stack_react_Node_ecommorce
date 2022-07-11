@@ -25,14 +25,16 @@ import CartScreen from "./components/cartScreen";
 import Login from "./components/Login";
 import Shipping from "./components/Shipping";
 import Register from "./components/Register";
+import PaymentMethod from "./components/PaymentMethod";
 const App = () => {
   const { Cart, CartStock, user, setUser } = useStateContext();
   const { cart } = Cart;
   const Logout = () => {
     setUser(null);
+    localStorage.removeItem("cartItems");
     localStorage.removeItem("user");
     localStorage.removeItem("shippingAddress");
-    localStorage.removeItem("cartItems");
+    localStorage.removeItem("paymentMethodLocal");
   };
 
   return (
@@ -96,6 +98,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/shipping" element={<Shipping />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/payment" element={<PaymentMethod />} />
             </Routes>
           </Container>
         </main>

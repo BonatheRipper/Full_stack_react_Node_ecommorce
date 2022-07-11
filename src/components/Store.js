@@ -17,6 +17,9 @@ const intialStateCart = {
   shippingDetails: localStorage.getItem("shippingAddress")
     ? JSON.parse(localStorage.getItem("shippingAddress"))
     : {},
+  PaymentMethod: localStorage.getItem("paymentMethodLocal")
+    ? localStorage.getItem("paymentMethodLocal")
+    : "",
 };
 const intialStateUser = {
   set: localStorage.getItem("user")
