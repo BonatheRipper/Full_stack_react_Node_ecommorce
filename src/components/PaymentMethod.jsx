@@ -22,15 +22,12 @@ const PaymentMethod = () => {
       setCart((prevCart) => {
         return {
           ...prevCart,
-          cart: { ...prevCart.cart },
-          shippingDetails: { ...prevCart.shipDetails },
           PaymentMethod: paymentMethodLocal,
         };
       });
     }
     navigate("/placeorder");
   };
-  console.log(Cart);
   useEffect(() => {
     if (!shippingDetails.address) {
       navigate("/shipping");

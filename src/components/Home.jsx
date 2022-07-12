@@ -25,11 +25,18 @@ const Home = () => {
           return {
             ...prevProducts,
             error: e.message,
+            loading: true,
           };
         });
       }
     };
     fetchData();
+    const KeepTryingConnection = setInterval(() => {
+      fetchData();
+    }, 30000);
+    if (!products.loading) {
+      clearInterval(KeepTryingConnection);
+    }
   }, []);
 
   return (

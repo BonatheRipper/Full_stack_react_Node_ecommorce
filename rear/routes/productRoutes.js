@@ -23,7 +23,6 @@ productRouter.get("/:id", async (req, res) => {
   if (product) {
     res.send(product);
   } else {
-    console.log("there was an error");
     return res.status(404).send({ message: "Products not found" });
   }
 });

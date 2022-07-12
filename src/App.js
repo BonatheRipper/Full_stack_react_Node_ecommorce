@@ -26,6 +26,7 @@ import Login from "./components/Login";
 import Shipping from "./components/Shipping";
 import Register from "./components/Register";
 import PaymentMethod from "./components/PaymentMethod";
+import PlaceOrderScreen from "./components/PlaceOrderScreen";
 const App = () => {
   const { Cart, CartStock, user, setUser } = useStateContext();
   const { cart } = Cart;
@@ -99,6 +100,7 @@ const App = () => {
               <Route path="/shipping" element={<Shipping />} />
               <Route path="/register" element={<Register />} />
               <Route path="/payment" element={<PaymentMethod />} />
+              <Route path="/placeorder" element={<PlaceOrderScreen />} />
             </Routes>
           </Container>
         </main>

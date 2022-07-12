@@ -40,7 +40,6 @@ const CartScreen = () => {
         return object.quantity + total;
       }, 0)
     );
-    console.log(cartItems);
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
   const proceedToCheckOut = () => {

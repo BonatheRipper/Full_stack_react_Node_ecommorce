@@ -35,7 +35,6 @@ const Products = (props) => {
       existItem.quantity = quantity;
     }
     setCartStock(0);
-    console.log(Cart);
   };
   useEffect(() => {
     setCartStock(

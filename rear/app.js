@@ -5,6 +5,7 @@ const port = 1000;
 
 import seedRouter from "./routes/seedRouter.js";
 import productRouter from "./routes/productRoutes.js";
+import ordersRouter from "./routes/ordersRouter.js";
 import usersRouter from "./routes/users.js";
 // Dotenv comfig.
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/seed", seedRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/orders", ordersRouter);
 
 app.use("/api/products", productRouter);
 app.use((err, req, res, next) => {
