@@ -7,7 +7,7 @@ import MessageBox from "./MessageBox";
 import React, { useEffect, useState } from "react";
 const Home = () => {
   const initial = { items: [null], loading: true, error: null };
-
+  const [reFetch, setRefetch] = useState(0);
   const [products, setProducts] = useState(initial);
   useEffect(() => {
     const fetchData = async () => {
@@ -22,22 +22,18 @@ const Home = () => {
         });
       } catch (e) {
         setProducts((prevProducts) => {
+          console.log("retrying....");
           return {
             ...prevProducts,
             error: e.message,
             loading: true,
           };
         });
+        setRefetch(Math.random() * 19948292839292938);
       }
     };
     fetchData();
-    const KeepTryingConnection = setInterval(() => {
-      fetchData();
-    }, 30000);
-    if (!products.loading) {
-      clearInterval(KeepTryingConnection);
-    }
-  }, []);
+  }, [reFetch]);
 
   return (
     <div>

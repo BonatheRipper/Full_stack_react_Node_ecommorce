@@ -6,13 +6,15 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import reportWebVitals from "./reportWebVitals";
 import { ContextProvider } from "./components/Store";
-
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 function Index() {
   return (
     <div className="component">
       <ContextProvider>
         <HelmetProvider>
-          <App />
+          <PayPalScriptProvider deferLoading={true}>
+            <App />
+          </PayPalScriptProvider>
         </HelmetProvider>
       </ContextProvider>
     </div>

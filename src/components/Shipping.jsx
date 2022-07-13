@@ -58,44 +58,49 @@ const Shipping = () => {
         <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="fullName">
             <Form.Label>Full Name</Form.Label>
+            <Form.Control
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
+            />
           </Form.Group>
-          <Form.Control
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            required
-          ></Form.Control>
+
           <Form.Group className="mb-3" controlId="Address">
             <Form.Label>Address</Form.Label>
+            <Form.Control
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              required
+            />
           </Form.Group>
-          <Form.Control
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
-          ></Form.Control>
+
           <Form.Group className="mb-3" controlId="City">
             <Form.Label>City</Form.Label>
+            <Form.Control
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              required
+            />
           </Form.Group>
-          <Form.Control
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            required
-          ></Form.Control>
+
           <Form.Group className="mb-3" controlId="postal">
             <Form.Label>Postal Code</Form.Label>
+            <Form.Control
+              value={postalCode}
+              onChange={(e) => setpostalCode(e.target.value)}
+              required
+            />
           </Form.Group>
-          <Form.Control
-            value={postalCode}
-            onChange={(e) => setpostalCode(e.target.value)}
-            required
-          ></Form.Control>
+
           <Form.Group className="mb-3" controlId="Country">
             <Form.Label>Country</Form.Label>
+            <Form.Control
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              required
+            />
           </Form.Group>
-          <Form.Control
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            required
-          ></Form.Control>
+
           <div className="mb-3 mt-3">
             <Button variant="primary" type="summit">
               Continue

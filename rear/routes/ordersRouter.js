@@ -27,9 +27,52 @@ ordersRouter.post(
     });
     const order = await newOrder.save();
 
-    console.log(order);
-
     return res.status(201).send({ message: "New Order Created", order });
+  })
+);
+ordersRouter.get(
+  "/mine",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    console.log("HHHELLLO");
+    const order = await Orders.find({ user: req.user._id });
+    if (order) {
+      console.log(order);
+      res.send(order);
+    } else {
+      console.log("theres n error");
+      res.status(404).send({ message: "There was an error" });
+    }
+  })
+);
+ordersRouter.get(
+  "/:orderId",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Orders.findById(req.params.orderId);
+    if (order) {
+      console.log(order);
+      res.send(order);
+    } else {
+      console.log("theres n error");
+      res.status(404).send({ message: "There was an error" });
+    }
+  })
+);
+
+ordersRouter.put(
+  "/:orderId/pay",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Orders.findById(req.params.orderId);
+    if (order) {
+      order.isPaid = true;
+      order.paidAt = Date.now();
+      const upDatedOrder = await order.save();
+      return res.send({ message: "Payment Success", upDatedOrder });
+    } else {
+      return res.status(404).send({ message: "order does not exist" });
+    }
   })
 );
 export default ordersRouter;

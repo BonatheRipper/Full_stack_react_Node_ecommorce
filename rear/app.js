@@ -21,7 +21,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/seed", seedRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/orders", ordersRouter);
-
+app.get("/api/keys/paypal", (req, res) => {
+  res.send(process.env.PayPal_Client_Id || "sb");
+});
 app.use("/api/products", productRouter);
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });

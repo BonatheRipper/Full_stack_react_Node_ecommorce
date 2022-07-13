@@ -24,5 +24,5 @@ export const isAuth = (req, res, next) => {
     });
     return;
   }
-  return res.status(401).send({ message: "something's not right" });
+  return res.status(401).send({ message: "something 's not right" });
 };
