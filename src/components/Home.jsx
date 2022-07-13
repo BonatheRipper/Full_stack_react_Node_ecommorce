@@ -7,32 +7,33 @@ import MessageBox from "./MessageBox";
 import React, { useEffect, useState } from "react";
 const Home = () => {
   const initial = { items: [null], loading: true, error: null };
-
+  const [reFetch, setRefetch] = useState(0);
   const [products, setProducts] = useState(initial);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await axios.get("/api/products");
-        console.log(result);
         setProducts((prevProducts) => {
           return {
             ...prevProducts,
-            items: result.data.products,
+            items: result.data,
             loading: false,
           };
         });
-        console.log(products);
       } catch (e) {
         setProducts((prevProducts) => {
+          console.log("retrying....");
           return {
             ...prevProducts,
             error: e.message,
+            loading: true,
           };
         });
+        setRefetch(Math.random() * 19948292839292938);
       }
     };
     fetchData();
-  }, []);
+  }, [reFetch]);
 
   return (
     <div>

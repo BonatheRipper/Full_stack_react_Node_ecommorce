@@ -7,41 +7,57 @@ import React, {
   useState,
 } from "react";
 
-// export const Store = createContext();
-// const intialStates = {
-//   cart: {
-//     cartItems: [],
-//   },
-// };
-// function reducer(state, action) {
-//   switch (action.type) {
-//     case "CART__ADD_ITEM":
-//       return {
-//         ...state,
-//         cart: {
-//           ...state.cart,
-//           cartItems: [...state.cart.cartItems, action.payload],
-//         },
-//       };
-//   }
-// }
-// export function StoreProvider(props) {
-//   const [state, dispatch] = useReducer(reducer, intialState);
-//   const value = { state, dispatch };
-//   return <Store.Provider value={value}>{props.children}</Store.Provider>;
-// }
-
 const StateContext = createContext();
-const intialState = {
+const intialStateCart = {
   cart: {
-    cartItems: [],
+    cartItems: localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : [],
   },
+  shippingDetails: localStorage.getItem("shippingAddress")
+    ? JSON.parse(localStorage.getItem("shippingAddress"))
+    : {},
+  PaymentMethod: localStorage.getItem("paymentMethodLocal")
+    ? localStorage.getItem("paymentMethodLocal")
+    : "",
 };
-
+const intialStateUser = {
+  set: localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null,
+};
 export const ContextProvider = ({ children }) => {
-  const [Cart, setCart] = useState(intialState);
+  const [Cart, setCart] = useState(intialStateCart);
+  const [CartStock, setCartStock] = useState(0);
+  const [user, setUser] = useState(intialStateUser.set);
+  const [fullName, setFullName] = useState(Cart.shippingDetails.fullName || "");
+  const [address, setAddress] = useState(Cart.shippingDetails.address || "");
+  const [city, setCity] = useState(Cart.shippingDetails.city || "");
+  const [postalCode, setpostalCode] = useState(
+    Cart.shippingDetails.postalCode || ""
+  );
+  const [country, setCountry] = useState(Cart.shippingDetails.country || "");
   return (
-    <StateContext.Provider value={{ Cart, setCart }}>
+    <StateContext.Provider
+      value={{
+        Cart,
+        CartStock,
+        fullName,
+        setFullName,
+        country,
+        setCountry,
+        city,
+        postalCode,
+        setpostalCode,
+        setCity,
+        address,
+        setAddress,
+        user,
+        setUser,
+        setCartStock,
+        setCart,
+      }}
+    >
       {children}
     </StateContext.Provider>
   );
