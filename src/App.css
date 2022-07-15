@@ -41,7 +41,8 @@ main {
 .rating span {
   color: #ffc00f;
 }
-.btn.btn-primary {
+.btn.btn-primary,
+.btn.btn-outline-primary {
   background-color: #f0c040;
   color: black;
 }
@@ -61,4 +62,35 @@ main {
 .checkout-steps > div.active {
   border-bottom: 0.2rem solid #f08000;
   color: #f08000;
+}
+.active-con {
+  margin-left: 240px;
+}
+.active-nav {
+  left: 0;
+}
+.site-container {
+  transition: 0.4s;
+}
+.side-navbar {
+  width: 240px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  background-color: #100901;
+  transition: 0.5s;
+}
+.side-navbarHide {
+  width: 240px;
+  height: 100%;
+  position: absolute;
+  left: -300px;
+  background-color: #100901;
+  transition: 0.5s;
+}
+.hide-side {
+  display: none !important;
+}
+.navbar-brand {
+  font-weight: bold;
 }
