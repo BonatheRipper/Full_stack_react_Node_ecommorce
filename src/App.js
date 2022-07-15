@@ -34,6 +34,8 @@ import Profile from "./components/Profile";
 import { GetError } from "./util";
 import axios from "axios";
 import SearchBtn from "./components/SearchBtn";
+import SearchScreen from "./components/SearchScreen";
+import ProtectedRoute from "./components/protectedRoutes";
 const App = () => {
   const { CartStock, user, setUser } = useStateContext();
   const [sidebarisOpen, setSidebarIsOpen] = useState(false);
@@ -120,6 +122,13 @@ const App = () => {
                       Sign In
                     </Link>
                   )}
+                  {user && user.isAdmin && (
+                    <NavDropdown title="admin-nav-dropdown">
+                      <LinkContainer to="/dashboard">
+                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )}
                 </Nav>
               </Navbar.Collapse>
             </Container>
@@ -157,14 +166,37 @@ const App = () => {
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
 
               <Route path="/shipping" element={<Shipping />} />
+              <Route path="/search" element={<SearchScreen />} />
+
               <Route path="/register" element={<Register />} />
               <Route path="/payment" element={<PaymentMethod />} />
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
-              <Route path="/orderhistory" element={<OrderHistory />} />
-              <Route path="/order/:orderId" element={<OrdersScreen />} />
+              <Route
+                path="/orderhistory"
+                element={
+                  <ProtectedRoute>
+                    <OrderHistory />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/order/:orderId"
+                element={
+                  <ProtectedRoute>
+                    <OrdersScreen />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </Container>
         </main>
